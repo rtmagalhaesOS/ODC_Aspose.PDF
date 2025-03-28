@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsposePDF", "AsposePDF.csproj", "{4CBE027E-CD4A-4872-B391-C24B1076F479}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Academic|Any CPU = Academic|Any CPU
+		Community|Any CPU = Community|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Demo|Any CPU = Demo|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Test|Any CPU = Test|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4CBE027E-CD4A-4872-B391-C24B1076F479}.Academic|Any CPU.ActiveCfg = Release|Any CPU
+		{4CBE027E-CD4A-4872-B391-C24B1076F479}.Academic|Any CPU.Build.0 = Release|Any CPU
+		{4CBE027E-CD4A-4872-B391-C24B1076F479}.Community|Any CPU.ActiveCfg = Release|Any CPU
+		{4CBE027E-CD4A-4872-B391-C24B1076F479}.Community|Any CPU.Build.0 = Release|Any CPU
+		{4CBE027E-CD4A-4872-B391-C24B1076F479}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CBE027E-CD4A-4872-B391-C24B1076F479}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CBE027E-CD4A-4872-B391-C24B1076F479}.Demo|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CBE027E-CD4A-4872-B391-C24B1076F479}.Demo|Any CPU.Build.0 = Debug|Any CPU
+		{4CBE027E-CD4A-4872-B391-C24B1076F479}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CBE027E-CD4A-4872-B391-C24B1076F479}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CBE027E-CD4A-4872-B391-C24B1076F479}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{4CBE027E-CD4A-4872-B391-C24B1076F479}.Test|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {43F2FF4E-82CF-4988-91AE-CE99AE9D36B7}
+	EndGlobalSection
+EndGlobal
