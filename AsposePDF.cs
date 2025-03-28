@@ -1,6 +1,7 @@
 ﻿using Aspose.Pdf;
 
 namespace AsposePDF;
+
 public class AsposePDF : IAsposePDF
 {
     public byte[] SetPdfFormat(byte[] asposeLicenseData, byte[] pdfFile, string format)
@@ -126,7 +127,41 @@ public class AsposePDF : IAsposePDF
         }
     }
 
-    public byte[] EmbeddedXMLinPDF(byte[] asposeLicenseData, byte[] filePdf, byte[] attachmentXML, string attachmentXMLFilename, string fileName, string description, out int pageCount)
+    public byte[] EmbeddedXMLinPDF(byte[] asposeLicenseData, byte[] filePdf, string fileName, byte[] attachmentXML, string attachmentXMLFilename, string description, out int pageCount)
+    {
+        try
+        {
+            // Set Aspose License key
+            SetAsposeLicenseFromStream(asposeLicenseData);
+
+            // Initialize document object
+            using MemoryStream inputStream = new(filePdf);
+            using Document finalDocument = new(inputStream);
+
+            // Add file name as metadata
+            finalDocument.Info.Title = fileName;
+
+            // Attach XML file
+            if (attachmentXML != null && attachmentXML.Length > 0)
+            {
+                AttachXML(finalDocument, attachmentXML, attachmentXMLFilename, description);
+            }
+
+            // Get the number of pages
+            pageCount = finalDocument.Pages.Count;
+
+            // Return pdf content        
+            using MemoryStream finalOutStream = new();
+            finalDocument.Save(finalOutStream);
+            return finalOutStream.ToArray();
+        }
+        catch (Exception e)
+        {
+            throw new Exception(e.Message + " StackTrace: " + e.StackTrace + " : " + e.InnerException + " : " + e.Source + " : " + e.Data);
+        }
+    }
+
+    public byte[] EmbeddedZUGFeRDinPDF(byte[] asposeLicenseData, byte[] filePdf, string fileName, byte[] attachmentXML, string attachmentXMLFilename,  out int pageCount)
     {
         try
         {
@@ -145,6 +180,7 @@ public class AsposePDF : IAsposePDF
             {
                 AttachZUGFeRD(finalDocument, attachmentXML, attachmentXMLFilename);
             }
+
             // Get the number of pages
             pageCount = finalDocument.Pages.Count;
 
@@ -159,7 +195,7 @@ public class AsposePDF : IAsposePDF
         }
     }
 
-    private static void AttachZUGFeRD(Document document, byte[] xmlAttachment, string attachmentXMLfilename)
+    private static void AttachXML(Document document, byte[] xmlAttachment, string attachmentXMLfilename, string description)
     {
         if (document == null)
             throw new ArgumentNullException(nameof(document));
@@ -175,11 +211,38 @@ public class AsposePDF : IAsposePDF
             xmlStream.Position = 0; // Reset the stream position to the beginning after writing
 
             // Setup new file to be added as an attachment
-            var description = "Description";
             var fileSpecification = new FileSpecification(xmlStream, attachmentXMLfilename)
             {
                 Description = description,
                 MIMEType = "text/xml"
+            };
+
+            // Add the attachment to the document's attachment collection
+            document.EmbeddedFiles.Add(fileSpecification);
+        }
+    }
+
+    private static void AttachZUGFeRD(Document document, byte[] xmlAttachment, string description)
+    {
+        if (document == null)
+            throw new ArgumentNullException(nameof(document));
+
+        if (xmlAttachment == null || xmlAttachment.Length == 0)
+            throw new ArgumentException("The ZUGFeRD attachment cannot be null or empty.", nameof(xmlAttachment));
+
+        // Create a MemoryStream to hold the XML attachment
+        using (var xmlStream = new MemoryStream())
+        {
+            // Write the XML attachment to the memory stream
+            xmlStream.Write(xmlAttachment, 0, xmlAttachment.Length);
+            xmlStream.Position = 0; // Reset the stream position to the beginning after writing
+
+            // Setup new file to be added as an attachment
+            var fileSpecification = new FileSpecification(xmlStream, description)
+            {
+                Description = "Zugferd",
+                MIMEType = "text/xml",
+                Name = "factur-x.xml"
             };
 
             // Add the attachment to the document's attachment collection
